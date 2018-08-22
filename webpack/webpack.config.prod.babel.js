@@ -7,7 +7,7 @@ import webpackCommon from './webpack.config.common.babel';
 export default merge.smartStrategy({
   entry: 'prepend',
   plugins: 'append',
-  'module.rules': 'prepend',
+  'module.rules': 'append',
 })(webpackCommon, {
   mode: 'production',
 

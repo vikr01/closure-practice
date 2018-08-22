@@ -5,10 +5,13 @@ import CleanWebpackPlugin from 'clean-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import path from 'path';
 import titleCase from 'title-case';
+// import ClosureWebpackPlugin from 'closure-webpack-plugin';
 import Globals from './globals';
 import { productName as name } from '../package.json';
 
 const title = titleCase(name);
+
+const outputDir = path.join(__dirname, '..', 'dist/assets/bundles/');
 
 export default {
   target: 'web',
@@ -16,20 +19,25 @@ export default {
   context: path.join(__dirname, '..'),
 
   entry: {
-    Presentation: [path.join(__dirname, '..', 'src/components/Entry.jsx')],
+    Entry: [path.join(__dirname, '..', 'src/soy/simple.soy')],
   },
 
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', 'soy'],
   },
 
   output: {
-    path: path.join(__dirname, '..', 'dist/assets/bundles/'),
+    path: outputDir,
     publicPath: './bundles/',
   },
 
   module: {
     rules: [
+      {
+        test: /\.soy$/,
+        use: [{ loader: 'soy-loader', options: { outputDir } }],
+      },
+
       {
         test: /\.css$/,
         use: [
@@ -46,6 +54,12 @@ export default {
   },
 
   plugins: [
+    // new ClosureWebpackPlugin(
+    //   { mode: 'STANDARD' },
+    //   {
+    //     platform: 'JAVASCRIPT',
+    //   }
+    // ),
     new CleanWebpackPlugin([path.join(__dirname, '..', 'dist/assets')], {
       verbose: process.env.VERBOSE === 'true',
       allowExternal: true,
