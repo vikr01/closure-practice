@@ -3,6 +3,7 @@ import '../styles/global.css';
 import React, { Component, Fragment } from 'react';
 import type { Node } from 'react';
 import { hot } from 'react-hot-loader';
+import { hello } from '../soy/simple.soy';
 
 type Props = {};
 
@@ -22,7 +23,7 @@ export default hot(module)(
     }
 
     render(): Node {
-      return <Fragment>{null}</Fragment>;
+      return <Fragment>{hello({ name: 'Vik' }).content}</Fragment>;
     }
   }
 );

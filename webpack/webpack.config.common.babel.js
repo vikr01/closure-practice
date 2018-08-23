@@ -11,23 +11,21 @@ import { productName as name } from '../package.json';
 
 const title = titleCase(name);
 
-const outputDir = path.join(__dirname, '..', 'dist/assets/bundles/');
-
 export default {
   target: 'web',
 
   context: path.join(__dirname, '..'),
 
   entry: {
-    Entry: [path.join(__dirname, '..', 'src/soy/simple.soy')],
+    Entry: [path.join(__dirname, '..', 'src/components/Entry.jsx')],
   },
 
   resolve: {
-    extensions: ['.js', '.jsx', 'soy'],
+    extensions: ['.js', '.jsx'],
   },
 
   output: {
-    path: outputDir,
+    path: path.join(__dirname, '..', 'dist/assets/bundles/'),
     publicPath: './bundles/',
   },
 
@@ -35,7 +33,7 @@ export default {
     rules: [
       {
         test: /\.soy$/,
-        use: [{ loader: 'soy-loader', options: { outputDir } }],
+        use: [{ loader: 'soy-loader' }],
       },
 
       {
