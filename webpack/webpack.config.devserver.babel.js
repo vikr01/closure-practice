@@ -1,6 +1,5 @@
 // @flow
 import { HotModuleReplacementPlugin } from 'webpack';
-import DashboardPlugin from 'webpack-dashboard/plugin';
 import merge from 'webpack-merge';
 import path from 'path';
 import WriteFilePlugin from 'write-file-webpack-plugin';
@@ -42,8 +41,6 @@ export default merge.smartStrategy({
       test: /\.((woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?)|(html|ejs)$/,
       useHashIndex: true,
     }),
-
-    new DashboardPlugin(),
 
     new HotModuleReplacementPlugin({
       // multiStep: true,
