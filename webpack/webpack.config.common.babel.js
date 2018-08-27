@@ -33,7 +33,12 @@ export default {
     rules: [
       {
         test: /\.soy$/,
-        use: [{ loader: 'soy-loader' }],
+        use: [
+          {
+            loader: 'soy-loader',
+            options: {},
+          },
+        ],
       },
 
       {
